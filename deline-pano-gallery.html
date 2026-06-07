@@ -265,96 +265,43 @@
   </div>
 
   <script>
-    /*
-      HOW TO USE THIS SECTION
-
-      title:
-      The name shown on the top-left of the panorama.
-
-      panorama:
-      The direct 360/equirectangular image link.
-      Best format: direct .jpg link.
-
-      thumb:
-      Small thumbnail image shown in the right gallery.
-
-      full:
-      Link opened by the "Open full image" button.
-
-      hotSpots:
-      The description labels inside the panorama.
-
-      pitch:
-      Up/down coordinate.
-      Positive = higher.
-      Negative = lower.
-
-      yaw:
-      Left/right rotation coordinate.
-      0 = starting/front direction.
-      90 = right.
-      -90 = left.
-      180 = behind.
-    */
-
     const panoramas = [
       {
-  title: "Panorama 1 - Drone 360 View",
-  panorama: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCFDZGUM4buRr___h65vVcRAYNPtcDzeyRSzLwR6X9544Y?e=ayjH3a",
-  thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCFDZGUM4buRr___h65vVcRAYNPtcDzeyRSzLwR6X9544Y?e=ayjH3a",
-  full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCFDZGUM4buRr___h65vVcRAYNPtcDzeyRSzLwR6X9544Y?e=ayjH3a",
-  hotSpots: [
-    {
-      pitch: 0,
-      yaw: 0,
-      text: "Temporary label. Replace this after finding the correct coordinate."
-    }
-  ]
-},
+        title: "Panorama 1 - Drone 360 View",
+
+        /*
+          This SharePoint link may not work as the panorama image unless it is a direct image file link.
+          If it fails, replace panorama and thumb with direct public image links.
+        */
+        panorama: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCFDZGUM4buRr___h65vVcRAYNPtcDzeyRSzLwR6X9544Y?e=ayjH3a",
+        thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCFDZGUM4buRr___h65vVcRAYNPtcDzeyRSzLwR6X9544Y?e=ayjH3a",
+        full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCFDZGUM4buRr___h65vVcRAYNPtcDzeyRSzLwR6X9544Y?e=ayjH3a",
+
+        hotSpots: [
+          {
+            pitch: 0,
+            yaw: 0,
+            text: "Temporary label. Replace this after finding the correct coordinate."
+          }
+        ]
+      },
 
       {
         title: "Panorama 2 - Test View",
-        panorama: "https://pannellum.org/images/jfk.jpg",
-        thumb: "https://pannellum.org/images/jfk.jpg",
-        full: "https://pannellum.org/images/jfk.jpg",
+        panorama: "https://pannellum.org/images/alma.jpg",
+        thumb: "https://pannellum.org/images/alma.jpg",
+        full: "https://pannellum.org/images/alma.jpg",
+
         hotSpots: [
           {
-            pitch: 3,
-            yaw: 117,
-            text: "Example information point for panorama 2."
+            pitch: 14.1,
+            yaw: 1.5,
+            text: "Example point: describe a landscape feature, building, shoreline, research location, or monitoring area here."
           },
           {
-            pitch: -4,
-            yaw: 40,
-            text: "Another description point inside panorama 2."
-          }
-        ]
-      },
-
-      {
-        title: "Panorama 3 - Future Slot",
-        panorama: "YOUR_360_IMAGE_LINK_3",
-        thumb: "YOUR_THUMBNAIL_IMAGE_LINK_3",
-        full: "YOUR_FULL_IMAGE_LINK_3",
-        hotSpots: [
-          {
-            pitch: 0,
-            yaw: 0,
-            text: "Temporary label for Panorama 3."
-          }
-        ]
-      },
-
-      {
-        title: "Panorama 4 - Future Slot",
-        panorama: "YOUR_360_IMAGE_LINK_4",
-        thumb: "YOUR_THUMBNAIL_IMAGE_LINK_4",
-        full: "YOUR_FULL_IMAGE_LINK_4",
-        hotSpots: [
-          {
-            pitch: 0,
-            yaw: 0,
-            text: "Temporary label for Panorama 4."
+            pitch: -9.4,
+            yaw: 222.6,
+            text: "Example point: add context, note, or interpretation for this location."
           }
         ]
       }
