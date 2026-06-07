@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Délı̨nę Drone Gallery</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .drone-gallery-app {
+      max-width: 1200px;
+      height: 760px;
+      min-height: 760px;
+      margin: 35px auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 22px;
+      align-items: stretch;
+      font-family: Arial, sans-serif;
+    }
+
+    .drone-main-section {
+      position: relative;
+      background: #f2f2f2;
+      border-radius: 14px;
+      overflow: hidden;
+      height: 760px;
+      min-height: 760px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drone-main-section a {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    #drone-main-image {
+      width: 100%;
+      height: 760px;
+      object-fit: contain;
+      display: block;
+      background: #000000;
+      cursor: pointer;
+    }
+
+    .drone-main-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 46px;
+      height: 64px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.45);
+      color: #ffffff;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .drone-main-arrow:hover {
+      background: rgba(0,0,0,0.75);
+    }
+
+    .drone-left-arrow {
+      left: 14px;
+    }
+
+    .drone-right-arrow {
+      right: 14px;
+    }
+
+    .drone-main-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 18px;
+      background: rgba(0,0,0,0.58);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .drone-thumbnail-panel {
+      background: #f2f2f2;
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 760px;
+      max-height: 760px;
+      box-sizing: border-box;
+    }
+
+    .drone-thumb-arrow {
+      width: 100%;
+      height: 38px;
+      border: none;
+      border-radius: 8px;
+      background: #333333;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 4px 0;
+    }
+
+    .drone-thumb-arrow:hover {
+      background: #000000;
+    }
+
+    .drone-thumbnail-list {
+      width: 100%;
+      overflow: hidden;
+      scroll-behavior: smooth;
+      padding: 8px 0;
+      flex: 1;
+    }
+
+    .drone-thumb {
+      width: 100%;
+      height: 95px;
+      object-fit: cover;
+      display: block;
+      border-radius: 9px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      opacity: 0.65;
+      border: 3px solid transparent;
+      box-sizing: border-box;
+    }
+
+    .drone-thumb:hover {
+      opacity: 1;
+    }
+
+    .drone-thumb.active {
+      opacity: 1;
+      border-color: #2b6cb0;
+    }
+
+    @media screen and (max-width: 850px) {
+      .drone-gallery-app {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
+      }
+
+      .drone-main-section {
+        height: 480px;
+        min-height: 480px;
+      }
+
+      #drone-main-image {
+        height: 480px;
+      }
+
+      .drone-thumbnail-panel {
+        height: auto;
+        max-height: none;
+      }
+
+      .drone-thumbnail-list {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 10px;
+      }
+
+      .drone-thumb {
+        width: 120px;
+        height: 80px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+
+      .drone-thumb-arrow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="drone-gallery-app">
+
+    <!-- Main large image area -->
+    <div class="drone-main-section">
+
+      <button class="drone-main-arrow drone-left-arrow" id="main-left-button">
+        &#10094;
+      </button>
+
+      <a id="drone-main-link" href="" target="_blank">
+        <img id="drone-main-image" src="" alt="Drone shot 1">
+      </a>
+
+      <button class="drone-main-arrow drone-right-arrow" id="main-right-button">
+        &#10095;
+      </button>
+
+      <div id="drone-main-caption" class="drone-main-caption">
+        Drone shot 1
+      </div>
+
+    </div>
+
+    <!-- Right vertical thumbnail gallery -->
+    <div class="drone-thumbnail-panel">
+
+      <button class="drone-thumb-arrow" id="thumb-up-button">
+        &#9650;
+      </button>
+
+      <div id="drone-thumbnail-list" class="drone-thumbnail-list">
+        <!-- Thumbnails are inserted by JavaScript -->
+      </div>
+
+      <button class="drone-thumb-arrow" id="thumb-down-button">
+        &#9660;
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    /*
+      Replace these test links with your real photo links later.
+
+      thumb = smaller compressed display image
+      full = full-size SharePoint / OneDrive / public image link
+      caption = text shown under the large image
+    */
+
+    const droneImages = [
+      {
+        thumb: "https://picsum.photos/id/1018/1200/800",
+        full: "https://picsum.photos/id/1018/2400/1600",
+        caption: "Drone shot 1"
+      },
+      {
+        thumb: "https://picsum.photos/id/1015/1200/800",
+        full: "https://picsum.photos/id/1015/2400/1600",
+        caption: "Drone shot 2"
+      },
+      {
+        thumb: "https://picsum.photos/id/1016/1200/800",
+        full: "https://picsum.photos/id/1016/2400/1600",
+        caption: "Drone shot 3"
+      },
+      {
+        thumb: "https://picsum.photos/id/1020/1200/800",
+        full: "https://picsum.photos/id/1020/2400/1600",
+        caption: "Drone shot 4"
+      },
+      {
+        thumb: "https://picsum.photos/id/1024/1200/800",
+        full: "https://picsum.photos/id/1024/2400/1600",
+        caption: "Drone shot 5"
+      },
+      {
+        thumb: "https://picsum.photos/id/1039/1200/800",
+        full: "https://picsum.photos/id/1039/2400/1600",
+        caption: "Drone shot 6"
+      },
+      {
+        thumb: "https://picsum.photos/id/1043/1200/800",
+        full: "https://picsum.photos/id/1043/2400/1600",
+        caption: "Drone shot 7"
+      },
+      {
+        thumb: "https://picsum.photos/id/1050/1200/800",
+        full: "https://picsum.photos/id/1050/2400/1600",
+        caption: "Drone shot 8"
+      },
+      {
+        thumb: "https://picsum.photos/id/1056/1200/800",
+        full: "https://picsum.photos/id/1056/2400/1600",
+        caption: "Drone shot 9"
+      },
+      {
+        thumb: "https://picsum.photos/id/1069/1200/800",
+        full: "https://picsum.photos/id/1069/2400/1600",
+        caption: "Drone shot 10"
+      }
+    ];
+
+    let currentImageIndex = 0;
+    let thumbnailStartIndex = 0;
+    const visibleThumbnailCount = 6;
+
+    const mainImage = document.getElementById("drone-main-image");
+    const mainLink = document.getElementById("drone-main-link");
+    const mainCaption = document.getElementById("drone-main-caption");
+    const thumbnailList = document.getElementById("drone-thumbnail-list");
+
+    function updateMainImage() {
+      mainImage.src = droneImages[currentImageIndex].thumb;
+      mainImage.alt = droneImages[currentImageIndex].caption;
+      mainLink.href = droneImages[currentImageIndex].full;
+      mainCaption.textContent = droneImages[currentImageIndex].caption;
+    }
+
+    function updateThumbnailList() {
+      thumbnailList.innerHTML = "";
+
+      const endIndex = Math.min(
+        thumbnailStartIndex + visibleThumbnailCount,
+        droneImages.length
+      );
+
+      for (let i = thumbnailStartIndex; i < endIndex; i++) {
+        const thumb = document.createElement("img");
+        thumb.className = "drone-thumb";
+        thumb.src = droneImages[i].thumb;
+        thumb.alt = droneImages[i].caption;
+
+        if (i === currentImageIndex) {
+          thumb.classList.add("active");
+        }
+
+        thumb.addEventListener("click", function () {
+          currentImageIndex = i;
+          updateMainImage();
+          updateThumbnailList();
+        });
+
+        thumbnailList.appendChild(thumb);
+      }
+    }
+
+    function keepCurrentImageVisibleInLibrary() {
+      if (currentImageIndex < thumbnailStartIndex) {
+        thumbnailStartIndex = currentImageIndex;
+      }
+
+      if (currentImageIndex >= thumbnailStartIndex + visibleThumbnailCount) {
+        thumbnailStartIndex = currentImageIndex - visibleThumbnailCount + 1;
+      }
+
+      const maxStartIndex = Math.max(0, droneImages.length - visibleThumbnailCount);
+
+      if (thumbnailStartIndex > maxStartIndex) {
+        thumbnailStartIndex = maxStartIndex;
+      }
+
+      if (thumbnailStartIndex < 0) {
+        thumbnailStartIndex = 0;
+      }
+    }
+
+    function showPreviousImage() {
+      currentImageIndex--;
+
+      if (currentImageIndex < 0) {
+        currentImageIndex = droneImages.length - 1;
+      }
+
+      keepCurrentImageVisibleInLibrary();
+      updateMainImage();
+      updateThumbnailList();
+    }
+
+    function showNextImage() {
+      currentImageIndex++;
+
+      if (currentImageIndex >= droneImages.length) {
+        currentImageIndex = 0;
+      }
+
+      keepCurrentImageVisibleInLibrary();
+      updateMainImage();
+      updateThumbnailList();
+    }
+
+    function scrollThumbnailsUp() {
+      thumbnailStartIndex--;
+
+      if (thumbnailStartIndex < 0) {
+        thumbnailStartIndex = 0;
+      }
+
+      updateThumbnailList();
+    }
+
+    function scrollThumbnailsDown() {
+      const maxStartIndex = Math.max(0, droneImages.length - visibleThumbnailCount);
+
+      thumbnailStartIndex++;
+
+      if (thumbnailStartIndex > maxStartIndex) {
+        thumbnailStartIndex = maxStartIndex;
+      }
+
+      updateThumbnailList();
+    }
+
+    document.getElementById("main-left-button").addEventListener("click", showPreviousImage);
+    document.getElementById("main-right-button").addEventListener("click", showNextImage);
+    document.getElementById("thumb-up-button").addEventListener("click", scrollThumbnailsUp);
+    document.getElementById("thumb-down-button").addEventListener("click", scrollThumbnailsDown);
+
+    updateMainImage();
+    updateThumbnailList();
+  </script>
+
+</body>
+</html>
