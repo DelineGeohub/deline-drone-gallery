@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <title>Délı̨nę 360 Panorama Gallery</title>
 
+  <!-- Pannellum 360 viewer -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
   <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
 
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       background: #ffffff;
@@ -207,6 +209,15 @@
         overflow-y: hidden;
       }
 
+      .pano-side-title {
+        display: none;
+      }
+
+      #pano-thumbs {
+        display: flex;
+        gap: 10px;
+      }
+
       .pano-thumb {
         width: 150px;
         flex-shrink: 0;
@@ -224,27 +235,68 @@
   <div class="pano-gallery">
 
     <div class="pano-main">
-      <div id="pano-title" class="pano-title">Panorama 1</div>
+      <div id="pano-title" class="pano-title">
+        Panorama 1
+      </div>
 
       <a id="pano-open" class="pano-open" href="#" target="_blank">
         Open full image
       </a>
 
-      <button id="pano-prev" class="pano-arrow pano-prev">&#10094;</button>
+      <button id="pano-prev" class="pano-arrow pano-prev">
+        &#10094;
+      </button>
 
       <div id="panorama"></div>
 
-      <button id="pano-next" class="pano-arrow pano-next">&#10095;</button>
+      <button id="pano-next" class="pano-arrow pano-next">
+        &#10095;
+      </button>
     </div>
 
     <div class="pano-side">
-      <div class="pano-side-title">360 Views</div>
+      <div class="pano-side-title">
+        360 Views
+      </div>
+
       <div id="pano-thumbs"></div>
     </div>
 
   </div>
 
   <script>
+    /*
+      HOW TO USE THIS SECTION
+
+      title:
+      The name shown on the top-left of the panorama.
+
+      panorama:
+      The direct 360/equirectangular image link.
+      Best format: direct .jpg link.
+
+      thumb:
+      Small thumbnail image shown in the right gallery.
+
+      full:
+      Link opened by the "Open full image" button.
+
+      hotSpots:
+      The description labels inside the panorama.
+
+      pitch:
+      Up/down coordinate.
+      Positive = higher.
+      Negative = lower.
+
+      yaw:
+      Left/right rotation coordinate.
+      0 = starting/front direction.
+      90 = right.
+      -90 = left.
+      180 = behind.
+    */
+
     const panoramas = [
       {
         title: "Panorama 1 - Test View",
@@ -264,6 +316,7 @@
           }
         ]
       },
+
       {
         title: "Panorama 2 - Test View",
         panorama: "https://pannellum.org/images/jfk.jpg",
@@ -274,6 +327,39 @@
             pitch: 3,
             yaw: 117,
             text: "Example information point for panorama 2."
+          },
+          {
+            pitch: -4,
+            yaw: 40,
+            text: "Another description point inside panorama 2."
+          }
+        ]
+      },
+
+      {
+        title: "Panorama 3 - Future Slot",
+        panorama: "YOUR_360_IMAGE_LINK_3",
+        thumb: "YOUR_THUMBNAIL_IMAGE_LINK_3",
+        full: "YOUR_FULL_IMAGE_LINK_3",
+        hotSpots: [
+          {
+            pitch: 0,
+            yaw: 0,
+            text: "Temporary label for Panorama 3."
+          }
+        ]
+      },
+
+      {
+        title: "Panorama 4 - Future Slot",
+        panorama: "YOUR_360_IMAGE_LINK_4",
+        thumb: "YOUR_THUMBNAIL_IMAGE_LINK_4",
+        full: "YOUR_FULL_IMAGE_LINK_4",
+        hotSpots: [
+          {
+            pitch: 0,
+            yaw: 0,
+            text: "Temporary label for Panorama 4."
           }
         ]
       }
@@ -330,7 +416,22 @@
         mouseZoom: true,
         draggable: true,
         hfov: 100,
-        hotSpotDebug: false,
+
+        /*
+          TEMPORARY DEBUG MODE:
+          Keep this true while placing labels.
+
+          How to get coordinates:
+          1. Open your GitHub Pages panorama page.
+          2. Right click → Inspect.
+          3. Open the Console tab.
+          4. Click inside the panorama where you want a label.
+          5. Copy the pitch and yaw values from the console.
+
+          After labels are finalized, change this to false.
+        */
+        hotSpotDebug: true,
+
         hotSpots: getHotspots(item.hotSpots)
       });
 
