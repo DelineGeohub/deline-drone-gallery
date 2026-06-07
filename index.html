@@ -140,6 +140,7 @@
       opacity: 0.65;
       border: 3px solid transparent;
       box-sizing: border-box;
+      background: #dddddd;
     }
 
     .drone-thumb:hover {
@@ -197,7 +198,6 @@
 
   <div class="drone-gallery-app">
 
-    <!-- Main large image area -->
     <div class="drone-main-section">
 
       <button class="drone-main-arrow drone-left-arrow" id="main-left-button">
@@ -205,7 +205,7 @@
       </button>
 
       <a id="drone-main-link" href="" target="_blank">
-        <img id="drone-main-image" src="" alt="Drone shot 1">
+        <img id="drone-main-image" src="" alt="Drone shot">
       </a>
 
       <button class="drone-main-arrow drone-right-arrow" id="main-right-button">
@@ -213,12 +213,11 @@
       </button>
 
       <div id="drone-main-caption" class="drone-main-caption">
-        Drone shot 1
+        Drone shot
       </div>
 
     </div>
 
-    <!-- Right vertical thumbnail gallery -->
     <div class="drone-thumbnail-panel">
 
       <button class="drone-thumb-arrow" id="thumb-up-button">
@@ -226,7 +225,6 @@
       </button>
 
       <div id="drone-thumbnail-list" class="drone-thumbnail-list">
-        <!-- Thumbnails are inserted by JavaScript -->
       </div>
 
       <button class="drone-thumb-arrow" id="thumb-down-button">
@@ -239,69 +237,45 @@
 
   <script>
     /*
-      Replace these test links with your real photo links later.
+      thumb = image shown inside the gallery.
+      full = link opened when users click the large image.
 
-      thumb = smaller compressed display image
-      full = full-size SharePoint / OneDrive / public image link
-      caption = text shown under the large image
+      Right now, both thumb and full use your SharePoint links.
+      If thumbnails do not display, replace thumb with compressed direct image links.
+      Keep full as the SharePoint link.
     */
 
     const droneImages = [
       {
-        thumb: "https://picsum.photos/id/1018/1200/800",
-        full: "https://picsum.photos/id/1018/2400/1600",
-        caption: "Drone shot 1"
+        thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQAbHjf2PJ3MQpy_5k21xfbhARBuP7l6hyYT-kzlXIiy_Qg?e=kdguff",
+        full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQAbHjf2PJ3MQpy_5k21xfbhARBuP7l6hyYT-kzlXIiy_Qg?e=kdguff",
+        caption: "Drone photo 1"
       },
       {
-        thumb: "https://picsum.photos/id/1015/1200/800",
-        full: "https://picsum.photos/id/1015/2400/1600",
-        caption: "Drone shot 2"
+        thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCqOmvB_2OrS6WJc-e4vZPRAan4Xd6VdOpMYWPnQ8sVhkg?e=S6Mr5o",
+        full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQCqOmvB_2OrS6WJc-e4vZPRAan4Xd6VdOpMYWPnQ8sVhkg?e=S6Mr5o",
+        caption: "Drone photo 2"
       },
       {
-        thumb: "https://picsum.photos/id/1016/1200/800",
-        full: "https://picsum.photos/id/1016/2400/1600",
-        caption: "Drone shot 3"
+        thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQB6bCPdtDtrRKA5Pr62b2u2AQCPE1ozdAB-FTzsI95E7-A?e=b1XNfL",
+        full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQB6bCPdtDtrRKA5Pr62b2u2AQCPE1ozdAB-FTzsI95E7-A?e=b1XNfL",
+        caption: "Drone photo 3"
       },
       {
-        thumb: "https://picsum.photos/id/1020/1200/800",
-        full: "https://picsum.photos/id/1020/2400/1600",
-        caption: "Drone shot 4"
+        thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQDcWDyk7mYPTrAhz5_-b5rkAYVWR8AbHmlJKeMMM7bhMlM?e=TKRxpQ",
+        full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQDcWDyk7mYPTrAhz5_-b5rkAYVWR8AbHmlJKeMMM7bhMlM?e=TKRxpQ",
+        caption: "Drone photo 4"
       },
       {
-        thumb: "https://picsum.photos/id/1024/1200/800",
-        full: "https://picsum.photos/id/1024/2400/1600",
-        caption: "Drone shot 5"
-      },
-      {
-        thumb: "https://picsum.photos/id/1039/1200/800",
-        full: "https://picsum.photos/id/1039/2400/1600",
-        caption: "Drone shot 6"
-      },
-      {
-        thumb: "https://picsum.photos/id/1043/1200/800",
-        full: "https://picsum.photos/id/1043/2400/1600",
-        caption: "Drone shot 7"
-      },
-      {
-        thumb: "https://picsum.photos/id/1050/1200/800",
-        full: "https://picsum.photos/id/1050/2400/1600",
-        caption: "Drone shot 8"
-      },
-      {
-        thumb: "https://picsum.photos/id/1056/1200/800",
-        full: "https://picsum.photos/id/1056/2400/1600",
-        caption: "Drone shot 9"
-      },
-      {
-        thumb: "https://picsum.photos/id/1069/1200/800",
-        full: "https://picsum.photos/id/1069/2400/1600",
-        caption: "Drone shot 10"
+        thumb: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQDve5tsAyL5SLVoS_pyNCbtAZGk_Lx4GucMUbSieAzpRrM?e=W05iIC",
+        full: "https://techiqdeline-my.sharepoint.com/:i:/g/personal/gis_manager_gov_deline_ca/IQDve5tsAyL5SLVoS_pyNCbtAZGk_Lx4GucMUbSieAzpRrM?e=W05iIC",
+        caption: "Drone photo 5"
       }
     ];
 
     let currentImageIndex = 0;
     let thumbnailStartIndex = 0;
-    const visibleThumbnailCount = 6;
+    const visibleThumbnailCount = 5;
 
     const mainImage = document.getElementById("drone-main-image");
     const mainLink = document.getElementById("drone-main-link");
