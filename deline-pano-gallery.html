@@ -488,19 +488,15 @@
         mouseZoom: true,
         draggable: true,
 
-        /*
-          Zoom setting:
-          Smaller hfov = more zoomed in.
-          minHfov: 1 allows very close zoom.
         */
-        hfov: 100,
+        hfov: 80,
         minHfov: 1,
         maxHfov: 110,
 
         /*
           Change this to false later if you do not want coordinate debug mode.
         */
-        hotSpotDebug: true,
+        hotSpotDebug: false,
 
         hotSpots: getHotspots(item.hotSpots)
       });
