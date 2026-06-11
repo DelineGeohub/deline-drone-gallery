@@ -191,42 +191,6 @@
       display: block;
     }
 
-    /* Temporary coordinate info box. Remove this section later if you want. */
-    .pano-coordinate-box {
-      position: absolute;
-      left: 50%;
-      bottom: 16px;
-      transform: translateX(-50%);
-      z-index: 35;
-      min-width: 280px;
-      background: rgba(0,0,0,0.78);
-      color: #ffffff;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      text-align: center;
-      line-height: 1.45;
-      pointer-events: auto;
-      user-select: text;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-    }
-
-    .pano-coordinate-box button {
-      margin-top: 7px;
-      padding: 5px 9px;
-      border: none;
-      border-radius: 5px;
-      background: #ffffff;
-      color: #000000;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .pano-coordinate-box button:hover {
-      background: #e5e5e5;
-    }
-
     @media screen and (max-width: 850px) {
       .pano-gallery {
         grid-template-columns: 1fr;
@@ -262,12 +226,6 @@
       .pano-thumb img {
         height: 85px;
       }
-
-      .pano-coordinate-box {
-        min-width: 230px;
-        font-size: 12px;
-        bottom: 12px;
-      }
     }
   </style>
 </head>
@@ -294,17 +252,6 @@
       <button id="pano-next" class="pano-arrow pano-next">
         &#10095;
       </button>
-
-      <!-- Temporary coordinate info box. No red cross marker is added. -->
-      <div id="pano-coordinate-box" class="pano-coordinate-box">
-        Center coordinate:
-        pitch <span id="center-pitch">0.00</span>,
-        yaw <span id="center-yaw">0.00</span>
-        <br>
-        <button id="copy-center-coordinate" type="button">
-          Copy hotspot code
-        </button>
-      </div>
     </div>
 
     <div class="pano-side">
@@ -327,9 +274,119 @@
 
         hotSpots: [
           {
-            pitch: 0,
-            yaw: 0,
-            text: "Behind TK Building. Replace this label after choosing the final point."
+            pitch: -21.85,
+            yaw: -123.57,
+            text: "Main Office"
+          },
+          {
+            pitch: -19.31,
+            yaw: -117.51,
+            text: "Aurora College"
+          },
+          {
+            pitch: -17.82,
+            yaw: -123.33,
+            text: "Culture Center"
+          },
+          {
+            pitch: -14.85,
+            yaw: -122.80,
+            text: "Great Bear CO-OP"
+          },
+          {
+            pitch: -13.47,
+            yaw: -130.49,
+            text: "Wellness Center"
+          },
+          {
+            pitch: -12.44,
+            yaw: -135.48,
+            text: "Church"
+          },
+          {
+            pitch: -12.16,
+            yaw: -138.55,
+            text: "Bishop House"
+          },
+          {
+            pitch: -10.77,
+            yaw: -139.50,
+            text: "Water Treatment Plant"
+          },
+          {
+            pitch: -11.12,
+            yaw: -168.25,
+            text: "Baseball Diamond"
+          },
+          {
+            pitch: -32.03,
+            yaw: -166.03,
+            text: "High School"
+          },
+          {
+            pitch: -54.14,
+            yaw: -154.44,
+            text: "Arena"
+          },
+          {
+            pitch: -45.45,
+            yaw: 147.23,
+            text: "Daycare Center"
+          },
+          {
+            pitch: -49.57,
+            yaw: 61.37,
+            text: "TK Building"
+          },
+          {
+            pitch: -6.83,
+            yaw: 6.87,
+            text: "Gas Station"
+          },
+          {
+            pitch: -3.66,
+            yaw: 40.07,
+            text: "Garbage Dump"
+          },
+          {
+            pitch: -1.29,
+            yaw: 35.64,
+            text: "Airport Strip"
+          },
+          {
+            pitch: -2.59,
+            yaw: -15.12,
+            text: "Ski Hill & Golf Course"
+          },
+          {
+            pitch: -9.42,
+            yaw: -38.84,
+            text: "Grey Goose Lodge"
+          },
+          {
+            pitch: -7.47,
+            yaw: -40.30,
+            text: "Cemetery"
+          },
+          {
+            pitch: -23.07,
+            yaw: -90.47,
+            text: "Northern Store"
+          },
+          {
+            pitch: -22.02,
+            yaw: -100.76,
+            text: "RCMP"
+          },
+          {
+            pitch: -17.89,
+            yaw: -49.53,
+            text: "Nurse Station"
+          },
+          {
+            pitch: -4.54,
+            yaw: -38.09,
+            text: "Little Lake"
           }
         ]
       },
@@ -386,9 +443,6 @@
     const titleEl = document.getElementById("pano-title");
     const openEl = document.getElementById("pano-open");
     const thumbsEl = document.getElementById("pano-thumbs");
-    const centerPitchEl = document.getElementById("center-pitch");
-    const centerYawEl = document.getElementById("center-yaw");
-    const copyCenterCoordinateButton = document.getElementById("copy-center-coordinate");
 
     function createTooltip(hotSpotDiv, args) {
       hotSpotDiv.classList.add("info-hotspot");
@@ -412,40 +466,6 @@
             text: point.text
           }
         };
-      });
-    }
-
-    function updateCenterCoordinateDisplay() {
-      if (!viewer) {
-        return;
-      }
-
-      centerPitchEl.textContent = viewer.getPitch().toFixed(2);
-      centerYawEl.textContent = viewer.getYaw().toFixed(2);
-    }
-
-    function copyCenterHotspotCode() {
-      if (!viewer) {
-        return;
-      }
-
-      const pitch = viewer.getPitch().toFixed(2);
-      const yaw = viewer.getYaw().toFixed(2);
-
-      const hotspotCode =
-`{
-  pitch: ${pitch},
-  yaw: ${yaw},
-  text: "Write your label text here."
-}`;
-
-      navigator.clipboard.writeText(hotspotCode).then(function() {
-        copyCenterCoordinateButton.textContent = "Copied!";
-        setTimeout(function() {
-          copyCenterCoordinateButton.textContent = "Copy hotspot code";
-        }, 1400);
-      }).catch(function() {
-        alert(hotspotCode);
       });
     }
 
@@ -478,25 +498,13 @@
         maxHfov: 110,
 
         /*
-          TEMPORARY DEBUG MODE:
-          Keep this true while placing labels.
-
-          The coordinate box at the bottom shows the current center coordinate.
-          Move your target to the center, then copy the pitch/yaw values.
-          After labels are finalized, change hotSpotDebug to false.
+          Change this to false later if you do not want coordinate debug mode.
         */
         hotSpotDebug: true,
 
         hotSpots: getHotspots(item.hotSpots)
       });
 
-      viewer.on("load", updateCenterCoordinateDisplay);
-      viewer.on("mouseup", updateCenterCoordinateDisplay);
-      viewer.on("touchend", updateCenterCoordinateDisplay);
-      viewer.on("animatefinished", updateCenterCoordinateDisplay);
-      viewer.on("zoomchange", updateCenterCoordinateDisplay);
-
-      updateCenterCoordinateDisplay();
       updateThumbs();
     }
 
@@ -553,7 +561,6 @@
 
     document.getElementById("pano-prev").addEventListener("click", previousPanorama);
     document.getElementById("pano-next").addEventListener("click", nextPanorama);
-    copyCenterCoordinateButton.addEventListener("click", copyCenterHotspotCode);
 
     loadPanorama();
   </script>
