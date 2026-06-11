@@ -191,6 +191,42 @@
       display: block;
     }
 
+    /* Coordinate box for all panoramas */
+    .pano-coordinate-box {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      z-index: 35;
+      min-width: 290px;
+      background: rgba(0,0,0,0.78);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.45;
+      pointer-events: auto;
+      user-select: text;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+    }
+
+    .pano-coordinate-box button {
+      margin-top: 7px;
+      padding: 5px 9px;
+      border: none;
+      border-radius: 5px;
+      background: #ffffff;
+      color: #000000;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .pano-coordinate-box button:hover {
+      background: #e5e5e5;
+    }
+
     @media screen and (max-width: 850px) {
       .pano-gallery {
         grid-template-columns: 1fr;
@@ -226,6 +262,12 @@
       .pano-thumb img {
         height: 85px;
       }
+
+      .pano-coordinate-box {
+        min-width: 230px;
+        font-size: 12px;
+        bottom: 12px;
+      }
     }
   </style>
 </head>
@@ -252,6 +294,16 @@
       <button id="pano-next" class="pano-arrow pano-next">
         &#10095;
       </button>
+
+      <div id="pano-coordinate-box" class="pano-coordinate-box">
+        Center coordinate:
+        pitch <span id="center-pitch">0.00</span>,
+        yaw <span id="center-yaw">0.00</span>
+        <br>
+        <button id="copy-center-coordinate" type="button">
+          Copy hotspot code
+        </button>
+      </div>
     </div>
 
     <div class="pano-side">
@@ -271,6 +323,10 @@
         panorama: "PANNO Behind TK building.jpg",
         thumb: "PANNO Behind TK building.jpg",
         full: "PANNO Behind TK building.jpg",
+
+        // Start view direction: Main Office
+        initialPitch: -21.85,
+        initialYaw: -123.57,
 
         hotSpots: [
           {
@@ -397,6 +453,9 @@
         thumb: "PANNO Deline From TK (rain).jpg",
         full: "PANNO Deline From TK (rain).jpg",
 
+        initialPitch: 0,
+        initialYaw: 0,
+
         hotSpots: [
           {
             pitch: 0,
@@ -412,6 +471,9 @@
         thumb: "PANNO On lake at night.jpg",
         full: "PANNO On lake at night.jpg",
 
+        initialPitch: 0,
+        initialYaw: 0,
+
         hotSpots: [
           {
             pitch: 0,
@@ -426,6 +488,9 @@
         panorama: "PANNO On lake with fog.jpg",
         thumb: "PANNO On lake with fog.jpg",
         full: "PANNO On lake with fog.jpg",
+
+        initialPitch: 0,
+        initialYaw: 0,
 
         hotSpots: [
           {
@@ -443,6 +508,9 @@
     const titleEl = document.getElementById("pano-title");
     const openEl = document.getElementById("pano-open");
     const thumbsEl = document.getElementById("pano-thumbs");
+    const centerPitchEl = document.getElementById("center-pitch");
+    const centerYawEl = document.getElementById("center-yaw");
+    const copyCenterCoordinateButton = document.getElementById("copy-center-coordinate");
 
     function createTooltip(hotSpotDiv, args) {
       hotSpotDiv.classList.add("info-hotspot");
@@ -469,6 +537,40 @@
       });
     }
 
+    function updateCenterCoordinateDisplay() {
+      if (!viewer) {
+        return;
+      }
+
+      centerPitchEl.textContent = viewer.getPitch().toFixed(2);
+      centerYawEl.textContent = viewer.getYaw().toFixed(2);
+    }
+
+    function copyCenterHotspotCode() {
+      if (!viewer) {
+        return;
+      }
+
+      const pitch = viewer.getPitch().toFixed(2);
+      const yaw = viewer.getYaw().toFixed(2);
+
+      const hotspotCode =
+`{
+  pitch: ${pitch},
+  yaw: ${yaw},
+  text: "Write your label text here."
+}`;
+
+      navigator.clipboard.writeText(hotspotCode).then(function() {
+        copyCenterCoordinateButton.textContent = "Copied!";
+        setTimeout(function() {
+          copyCenterCoordinateButton.textContent = "Copy hotspot code";
+        }, 1400);
+      }).catch(function() {
+        alert(hotspotCode);
+      });
+    }
+
     function loadPanorama() {
       const item = panoramas[currentIndex];
 
@@ -488,19 +590,35 @@
         mouseZoom: true,
         draggable: true,
 
+        /*
+          Zoom setting:
+          Smaller hfov = more zoomed in.
+          minHfov: 1 allows very close zoom.
         */
-        hfov: 80,
+        hfov: 100,
         minHfov: 1,
         maxHfov: 110,
 
+        // Start direction for each panorama
+        pitch: item.initialPitch || 0,
+        yaw: item.initialYaw || 0,
+
         /*
-          Change this to false later if you do not want coordinate debug mode.
+          Keep this true while you are filling hotspots.
+          It helps with coordinate debugging too.
         */
-        hotSpotDebug: false,
+        hotSpotDebug: true,
 
         hotSpots: getHotspots(item.hotSpots)
       });
 
+      viewer.on("load", updateCenterCoordinateDisplay);
+      viewer.on("mouseup", updateCenterCoordinateDisplay);
+      viewer.on("touchend", updateCenterCoordinateDisplay);
+      viewer.on("animatefinished", updateCenterCoordinateDisplay);
+      viewer.on("zoomchange", updateCenterCoordinateDisplay);
+
+      updateCenterCoordinateDisplay();
       updateThumbs();
     }
 
@@ -557,6 +675,7 @@
 
     document.getElementById("pano-prev").addEventListener("click", previousPanorama);
     document.getElementById("pano-next").addEventListener("click", nextPanorama);
+    copyCenterCoordinateButton.addEventListener("click", copyCenterHotspotCode);
 
     loadPanorama();
   </script>
