@@ -4,18 +4,17 @@
   <meta charset="UTF-8">
   <title>Délı̨nę 360 Panorama Gallery</title>
 
-  <!-- Pannellum 360 viewer -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
   <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
 
   <style>
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       background: #ffffff;
       font-family: Arial, sans-serif;
     }
+
     .pano-gallery {
       max-width: 1200px;
       height: 650px;
@@ -39,35 +38,26 @@
       height: 100%;
     }
 
-    .pano-title {
+    .pano-title, .pano-open {
       position: absolute;
       top: 14px;
-      left: 14px;
       z-index: 20;
       background: rgba(0,0,0,0.58);
       color: #ffffff;
       padding: 10px 14px;
       border-radius: 8px;
-      font-size: 16px;
       font-weight: 600;
+    }
+
+    .pano-title {
+      left: 14px;
+      font-size: 16px;
     }
 
     .pano-open {
-      position: absolute;
-      top: 14px;
       right: 14px;
-      z-index: 20;
-      background: rgba(0,0,0,0.58);
-      color: #ffffff;
-      padding: 10px 14px;
-      border-radius: 8px;
       font-size: 14px;
-      font-weight: 600;
       text-decoration: none;
-    }
-
-    .pano-open:hover {
-      background: rgba(0,0,0,0.82);
     }
 
     .pano-arrow {
@@ -85,17 +75,8 @@
       cursor: pointer;
     }
 
-    .pano-arrow:hover {
-      background: rgba(0,0,0,0.78);
-    }
-
-    .pano-prev {
-      left: 14px;
-    }
-
-    .pano-next {
-      right: 14px;
-    }
+    .pano-prev { left: 14px; }
+    .pano-next { right: 14px; }
 
     .pano-side {
       height: 650px;
@@ -124,10 +105,6 @@
       border: 3px solid transparent;
       background: #dddddd;
       box-sizing: border-box;
-    }
-
-    .pano-thumb:hover {
-      opacity: 1;
     }
 
     .pano-thumb.active {
@@ -176,21 +153,18 @@
       padding: 10px 12px;
       border-radius: 8px;
       font-size: 13px;
-      line-height: 1.35;
       max-width: 240px;
       min-width: 170px;
       margin-left: 34px;
       margin-top: -8px;
       display: none;
       pointer-events: none;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
     }
 
     .info-hotspot:hover .info-tooltip {
       display: block;
     }
 
-    /* Coordinate box for all panoramas */
     .pano-coordinate-box {
       position: absolute;
       left: 50%;
@@ -206,9 +180,6 @@
       font-weight: 700;
       text-align: center;
       line-height: 1.45;
-      pointer-events: auto;
-      user-select: text;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
     }
 
     .pano-coordinate-box button {
@@ -221,463 +192,283 @@
       font-weight: 700;
       cursor: pointer;
     }
-
-    .pano-coordinate-box button:hover {
-      background: #e5e5e5;
-    }
-
-    @media screen and (max-width: 850px) {
-      .pano-gallery {
-        grid-template-columns: 1fr;
-        height: auto;
-      }
-
-      .pano-main {
-        height: 500px;
-      }
-
-      .pano-side {
-        height: auto;
-        display: flex;
-        gap: 10px;
-        overflow-x: auto;
-        overflow-y: hidden;
-      }
-
-      .pano-side-title {
-        display: none;
-      }
-
-      #pano-thumbs {
-        display: flex;
-        gap: 10px;
-      }
-
-      .pano-thumb {
-        width: 150px;
-        flex-shrink: 0;
-      }
-
-      .pano-thumb img {
-        height: 85px;
-      }
-
-      .pano-coordinate-box {
-        min-width: 230px;
-        font-size: 12px;
-        bottom: 12px;
-      }
-    }
   </style>
 </head>
 
 <body>
 
-  <div class="pano-gallery">
+<div class="pano-gallery">
+  <div class="pano-main">
+    <div id="pano-title" class="pano-title">Panorama 1</div>
+    <a id="pano-open" class="pano-open" href="#" target="_blank">Open full image</a>
+    <button id="pano-prev" class="pano-arrow pano-prev">&#10094;</button>
+    <div id="panorama"></div>
+    <button id="pano-next" class="pano-arrow pano-next">&#10095;</button>
 
-    <div class="pano-main">
-      <div id="pano-title" class="pano-title">
-        Panorama 1
-      </div>
-
-      <a id="pano-open" class="pano-open" href="#" target="_blank">
-        Open full image
-      </a>
-
-      <button id="pano-prev" class="pano-arrow pano-prev">
-        &#10094;
-      </button>
-
-      <div id="panorama"></div>
-
-      <button id="pano-next" class="pano-arrow pano-next">
-        &#10095;
-      </button>
-
-      <div id="pano-coordinate-box" class="pano-coordinate-box">
-        Center coordinate:
-        pitch <span id="center-pitch">0.00</span>,
-        yaw <span id="center-yaw">0.00</span>
-        <br>
-        <button id="copy-center-coordinate" type="button">
-          Copy hotspot code
-        </button>
-      </div>
+    <div id="pano-coordinate-box" class="pano-coordinate-box">
+      Center coordinate:
+      pitch <span id="center-pitch">0.00</span>,
+      yaw <span id="center-yaw">0.00</span>
+      <br>
+      <button id="copy-center-coordinate" type="button">Copy hotspot code</button>
     </div>
-
-    <div class="pano-side">
-      <div class="pano-side-title">
-        360 Views
-      </div>
-
-      <div id="pano-thumbs"></div>
-    </div>
-
   </div>
 
-  <script>
-    const panoramas = [
-      {
-        title: "Behind TK Building",
-        panorama: "PANNO Behind TK building.jpg",
-        thumb: "PANNO Behind TK building.jpg",
-        full: "PANNO Behind TK building.jpg",
+  <div class="pano-side">
+    <div class="pano-side-title">360 Views</div>
+    <div id="pano-thumbs"></div>
+  </div>
+</div>
 
-        // Start view direction: Main Office
-        initialPitch: -21.85,
-        initialYaw: -123.57,
+<script>
+const panoramas = [
+  {
+    title: "Behind TK Building",
+    panorama: "PANNO Behind TK building.jpg",
+    thumb: "PANNO Behind TK building.jpg",
+    full: "PANNO Behind TK building.jpg",
+    initialPitch: -21.85,
+    initialYaw: -123.57,
+    hotSpots: [
+      { pitch: -21.85, yaw: -123.57, text: "Main Office" },
+      { pitch: -19.31, yaw: -117.51, text: "Aurora College" },
+      { pitch: -17.82, yaw: -123.33, text: "Culture Center" },
+      { pitch: -14.85, yaw: -122.80, text: "Great Bear CO-OP" },
+      { pitch: -13.47, yaw: -130.49, text: "Wellness Center" },
+      { pitch: -12.44, yaw: -135.48, text: "Church" },
+      { pitch: -12.16, yaw: -138.55, text: "Bishop House" },
+      { pitch: -10.77, yaw: -139.50, text: "Water Treatment Plant" },
+      { pitch: -11.12, yaw: -168.25, text: "Baseball Diamond" },
+      { pitch: -32.03, yaw: -166.03, text: "High School" },
+      { pitch: -54.14, yaw: -154.44, text: "Arena" },
+      { pitch: -45.45, yaw: 147.23, text: "Daycare Center" },
+      { pitch: -49.57, yaw: 61.37, text: "TK Building" },
+      { pitch: -6.83, yaw: 6.87, text: "Gas Station" },
+      { pitch: -3.66, yaw: 40.07, text: "Garbage Dump" },
+      { pitch: -1.29, yaw: 35.64, text: "Airport Strip" },
+      { pitch: -2.59, yaw: -15.12, text: "Ski Hill & Golf Course" },
+      { pitch: -9.42, yaw: -38.84, text: "Grey Goose Lodge" },
+      { pitch: -7.47, yaw: -40.30, text: "Cemetery" },
+      { pitch: -23.07, yaw: -90.47, text: "Northern Store" },
+      { pitch: -22.02, yaw: -100.76, text: "RCMP" },
+      { pitch: -17.89, yaw: -49.53, text: "Nurse Station" },
+      { pitch: -4.54, yaw: -38.09, text: "Little Lake" }
+    ]
+  },
 
-        hotSpots: [
-          {
-            pitch: -21.85,
-            yaw: -123.57,
-            text: "Main Office"
-          },
-          {
-            pitch: -19.31,
-            yaw: -117.51,
-            text: "Aurora College"
-          },
-          {
-            pitch: -17.82,
-            yaw: -123.33,
-            text: "Culture Center"
-          },
-          {
-            pitch: -14.85,
-            yaw: -122.80,
-            text: "Great Bear CO-OP"
-          },
-          {
-            pitch: -13.47,
-            yaw: -130.49,
-            text: "Wellness Center"
-          },
-          {
-            pitch: -12.44,
-            yaw: -135.48,
-            text: "Church"
-          },
-          {
-            pitch: -12.16,
-            yaw: -138.55,
-            text: "Bishop House"
-          },
-          {
-            pitch: -10.77,
-            yaw: -139.50,
-            text: "Water Treatment Plant"
-          },
-          {
-            pitch: -11.12,
-            yaw: -168.25,
-            text: "Baseball Diamond"
-          },
-          {
-            pitch: -32.03,
-            yaw: -166.03,
-            text: "High School"
-          },
-          {
-            pitch: -54.14,
-            yaw: -154.44,
-            text: "Arena"
-          },
-          {
-            pitch: -45.45,
-            yaw: 147.23,
-            text: "Daycare Center"
-          },
-          {
-            pitch: -49.57,
-            yaw: 61.37,
-            text: "TK Building"
-          },
-          {
-            pitch: -6.83,
-            yaw: 6.87,
-            text: "Gas Station"
-          },
-          {
-            pitch: -3.66,
-            yaw: 40.07,
-            text: "Garbage Dump"
-          },
-          {
-            pitch: -1.29,
-            yaw: 35.64,
-            text: "Airport Strip"
-          },
-          {
-            pitch: -2.59,
-            yaw: -15.12,
-            text: "Ski Hill & Golf Course"
-          },
-          {
-            pitch: -9.42,
-            yaw: -38.84,
-            text: "Grey Goose Lodge"
-          },
-          {
-            pitch: -7.47,
-            yaw: -40.30,
-            text: "Cemetery"
-          },
-          {
-            pitch: -23.07,
-            yaw: -90.47,
-            text: "Northern Store"
-          },
-          {
-            pitch: -22.02,
-            yaw: -100.76,
-            text: "RCMP"
-          },
-          {
-            pitch: -17.89,
-            yaw: -49.53,
-            text: "Nurse Station"
-          },
-          {
-            pitch: -4.54,
-            yaw: -38.09,
-            text: "Little Lake"
-          }
-        ]
-      },
+  {
+    title: "Délı̨nę from TK Building - Rain",
+    panorama: "PANNO Deline From TK (rain).jpg",
+    thumb: "PANNO Deline From TK (rain).jpg",
+    full: "PANNO Deline From TK (rain).jpg",
+    initialPitch: -10.43,
+    initialYaw: -173.95,
+    hotSpots: [
+      { pitch: -36.27, yaw: -160.06, text: "TK Building" },
+      { pitch: -18.03, yaw: -174.88, text: "Arena" },
+      { pitch: -15.00, yaw: 167.73, text: "High School" },
+      { pitch: -22.54, yaw: 162.79, text: "Day Care" },
+      { pitch: -30.06, yaw: 47.60, text: "Weather Station" },
+      { pitch: -5.83, yaw: -61.55, text: "Gas Station" },
+      { pitch: -3.49, yaw: -20.87, text: "Garbage Dump" },
+      { pitch: -0.72, yaw: -23.70, text: "Airport" },
+      { pitch: -0.78, yaw: 50.40, text: "Borrow Pit" },
+      { pitch: -6.33, yaw: -108.90, text: "Grey Goose Lodge" },
+      { pitch: -3.56, yaw: -108.68, text: "Little Lake" },
+      { pitch: -9.98, yaw: -126.85, text: "Nurse Station" },
+      { pitch: -11.71, yaw: -139.66, text: "Fire Station" },
+      { pitch: -10.60, yaw: -160.02, text: "RCMP" },
+      { pitch: -10.90, yaw: -154.69, text: "Northern Store" },
+      { pitch: -10.43, yaw: -173.95, text: "Main Office" },
+      { pitch: -13.66, yaw: -172.09, text: "Youth Center" },
+      { pitch: -15.15, yaw: -168.34, text: "Sahtu SSI" },
+      { pitch: -7.35, yaw: 175.27, text: "Church" },
+      { pitch: -8.19, yaw: -175.17, text: "Great Bear COOP" },
+      { pitch: -9.23, yaw: -174.67, text: "Culture Center" },
+      { pitch: -9.90, yaw: -170.55, text: "Aurora College" },
+      { pitch: -7.76, yaw: 166.18, text: "Power Station" }
+    ]
+  },
 
-      {
-        title: "Délı̨nę from TK Building - Rain",
-        panorama: "PANNO Deline From TK (rain).jpg",
-        thumb: "PANNO Deline From TK (rain).jpg",
-        full: "PANNO Deline From TK (rain).jpg",
+  {
+    title: "On the Lake at Night",
+    panorama: "PANNO On lake at night.jpg",
+    thumb: "PANNO On lake at night.jpg",
+    full: "PANNO On lake at night.jpg",
+    initialPitch: -13.18,
+    initialYaw: 1.76,
+    hotSpots: [
+      { pitch: -37.81, yaw: 9.80, text: "Great Bear COOP" },
+      { pitch: -37.51, yaw: 59.64, text: "Wellness Center" },
+      { pitch: -26.08, yaw: 81.65, text: "Church" },
+      { pitch: -19.35, yaw: 93.41, text: "Bishops' House" },
+      { pitch: -20.49, yaw: 86.22, text: "Mission House" },
+      { pitch: -15.54, yaw: 107.55, text: "Water Plant" },
+      { pitch: -13.82, yaw: 69.09, text: "Power Plant" },
+      { pitch: -19.07, yaw: 3.81, text: "Culture Center" },
+      { pitch: -16.34, yaw: -7.71, text: "Aurora College" },
+      { pitch: -13.18, yaw: 1.76, text: "Main Office" },
+      { pitch: -5.43, yaw: 4.04, text: "Arena" },
+      { pitch: -11.01, yaw: -21.20, text: "RCMP" },
+      { pitch: -8.86, yaw: -25.19, text: "Northern Store" }
+    ]
+  },
 
-        initialPitch: 0,
-        initialYaw: 0,
+  {
+    title: "On the Lake with Fog",
+    panorama: "PANNO On lake with fog.jpg",
+    thumb: "PANNO On lake with fog.jpg",
+    full: "PANNO On lake with fog.jpg",
+    initialPitch: 0,
+    initialYaw: 0,
+    hotSpots: []
+  }
+];
 
-        hotSpots: [
-          {
-            pitch: 0,
-            yaw: 0,
-            text: "Délı̨nę from TK Building - Rain. Replace this label after choosing the final point."
-          }
-        ]
-      },
+let currentIndex = 0;
+let viewer = null;
 
-      {
-        title: "On the Lake at Night",
-        panorama: "PANNO On lake at night.jpg",
-        thumb: "PANNO On lake at night.jpg",
-        full: "PANNO On lake at night.jpg",
+const titleEl = document.getElementById("pano-title");
+const openEl = document.getElementById("pano-open");
+const thumbsEl = document.getElementById("pano-thumbs");
+const centerPitchEl = document.getElementById("center-pitch");
+const centerYawEl = document.getElementById("center-yaw");
+const copyCenterCoordinateButton = document.getElementById("copy-center-coordinate");
 
-        initialPitch: 0,
-        initialYaw: 0,
+function createTooltip(hotSpotDiv, args) {
+  hotSpotDiv.classList.add("info-hotspot");
+  const tooltip = document.createElement("div");
+  tooltip.className = "info-tooltip";
+  tooltip.innerHTML = args.text;
+  hotSpotDiv.appendChild(tooltip);
+}
 
-        hotSpots: [
-          {
-            pitch: 0,
-            yaw: 0,
-            text: "On the lake at night. Replace this label after choosing the final point."
-          }
-        ]
-      },
+function getHotspots(points) {
+  return points.map(function(point) {
+    return {
+      pitch: point.pitch,
+      yaw: point.yaw,
+      type: "info",
+      text: point.text,
+      createTooltipFunc: createTooltip,
+      createTooltipArgs: { text: point.text }
+    };
+  });
+}
 
-      {
-        title: "On the Lake with Fog",
-        panorama: "PANNO On lake with fog.jpg",
-        thumb: "PANNO On lake with fog.jpg",
-        full: "PANNO On lake with fog.jpg",
+function updateCenterCoordinateDisplay() {
+  if (!viewer) return;
+  centerPitchEl.textContent = viewer.getPitch().toFixed(2);
+  centerYawEl.textContent = viewer.getYaw().toFixed(2);
+}
 
-        initialPitch: 0,
-        initialYaw: 0,
+function copyCenterHotspotCode() {
+  if (!viewer) return;
 
-        hotSpots: [
-          {
-            pitch: 0,
-            yaw: 0,
-            text: "On the lake with fog. Replace this label after choosing the final point."
-          }
-        ]
-      }
-    ];
+  const pitch = viewer.getPitch().toFixed(2);
+  const yaw = viewer.getYaw().toFixed(2);
 
-    let currentIndex = 0;
-    let viewer = null;
-
-    const titleEl = document.getElementById("pano-title");
-    const openEl = document.getElementById("pano-open");
-    const thumbsEl = document.getElementById("pano-thumbs");
-    const centerPitchEl = document.getElementById("center-pitch");
-    const centerYawEl = document.getElementById("center-yaw");
-    const copyCenterCoordinateButton = document.getElementById("copy-center-coordinate");
-
-    function createTooltip(hotSpotDiv, args) {
-      hotSpotDiv.classList.add("info-hotspot");
-
-      const tooltip = document.createElement("div");
-      tooltip.className = "info-tooltip";
-      tooltip.innerHTML = args.text;
-
-      hotSpotDiv.appendChild(tooltip);
-    }
-
-    function getHotspots(points) {
-      return points.map(function(point) {
-        return {
-          pitch: point.pitch,
-          yaw: point.yaw,
-          type: "info",
-          text: point.text,
-          createTooltipFunc: createTooltip,
-          createTooltipArgs: {
-            text: point.text
-          }
-        };
-      });
-    }
-
-    function updateCenterCoordinateDisplay() {
-      if (!viewer) {
-        return;
-      }
-
-      centerPitchEl.textContent = viewer.getPitch().toFixed(2);
-      centerYawEl.textContent = viewer.getYaw().toFixed(2);
-    }
-
-    function copyCenterHotspotCode() {
-      if (!viewer) {
-        return;
-      }
-
-      const pitch = viewer.getPitch().toFixed(2);
-      const yaw = viewer.getYaw().toFixed(2);
-
-      const hotspotCode =
+  const hotspotCode =
 `{
   pitch: ${pitch},
   yaw: ${yaw},
   text: "Write your label text here."
 }`;
 
-      navigator.clipboard.writeText(hotspotCode).then(function() {
-        copyCenterCoordinateButton.textContent = "Copied!";
-        setTimeout(function() {
-          copyCenterCoordinateButton.textContent = "Copy hotspot code";
-        }, 1400);
-      }).catch(function() {
-        alert(hotspotCode);
-      });
+  navigator.clipboard.writeText(hotspotCode).then(function() {
+    copyCenterCoordinateButton.textContent = "Copied!";
+    setTimeout(function() {
+      copyCenterCoordinateButton.textContent = "Copy hotspot code";
+    }, 1400);
+  }).catch(function() {
+    alert(hotspotCode);
+  });
+}
+
+function loadPanorama() {
+  const item = panoramas[currentIndex];
+
+  if (viewer) viewer.destroy();
+
+  titleEl.textContent = item.title;
+  openEl.href = item.full;
+
+  viewer = pannellum.viewer("panorama", {
+    type: "equirectangular",
+    panorama: item.panorama,
+    autoLoad: true,
+    showControls: true,
+    compass: false,
+    mouseZoom: true,
+    draggable: true,
+    hfov: 100,
+    minHfov: 1,
+    maxHfov: 110,
+    pitch: item.initialPitch || 0,
+    yaw: item.initialYaw || 0,
+    hotSpotDebug: true,
+    hotSpots: getHotspots(item.hotSpots)
+  });
+
+  viewer.on("load", updateCenterCoordinateDisplay);
+  viewer.on("mouseup", updateCenterCoordinateDisplay);
+  viewer.on("touchend", updateCenterCoordinateDisplay);
+  viewer.on("animatefinished", updateCenterCoordinateDisplay);
+  viewer.on("zoomchange", updateCenterCoordinateDisplay);
+
+  updateCenterCoordinateDisplay();
+  updateThumbs();
+}
+
+function updateThumbs() {
+  thumbsEl.innerHTML = "";
+
+  panoramas.forEach(function(item, index) {
+    const thumb = document.createElement("div");
+    thumb.className = "pano-thumb";
+
+    if (index === currentIndex) {
+      thumb.classList.add("active");
     }
 
-    function loadPanorama() {
-      const item = panoramas[currentIndex];
+    const img = document.createElement("img");
+    img.src = item.thumb;
+    img.alt = item.title;
 
-      if (viewer) {
-        viewer.destroy();
-      }
+    const caption = document.createElement("div");
+    caption.className = "pano-thumb-caption";
+    caption.textContent = item.title;
 
-      titleEl.textContent = item.title;
-      openEl.href = item.full;
+    thumb.appendChild(img);
+    thumb.appendChild(caption);
 
-      viewer = pannellum.viewer("panorama", {
-        type: "equirectangular",
-        panorama: item.panorama,
-        autoLoad: true,
-        showControls: true,
-        compass: false,
-        mouseZoom: true,
-        draggable: true,
-
-        /*
-          Zoom setting:
-          Smaller hfov = more zoomed in.
-          minHfov: 1 allows very close zoom.
-        */
-        hfov: 100,
-        minHfov: 1,
-        maxHfov: 110,
-
-        // Start direction for each panorama
-        pitch: item.initialPitch || 0,
-        yaw: item.initialYaw || 0,
-
-        /*
-          Keep this true while you are filling hotspots.
-          It helps with coordinate debugging too.
-        */
-        hotSpotDebug: true,
-
-        hotSpots: getHotspots(item.hotSpots)
-      });
-
-      viewer.on("load", updateCenterCoordinateDisplay);
-      viewer.on("mouseup", updateCenterCoordinateDisplay);
-      viewer.on("touchend", updateCenterCoordinateDisplay);
-      viewer.on("animatefinished", updateCenterCoordinateDisplay);
-      viewer.on("zoomchange", updateCenterCoordinateDisplay);
-
-      updateCenterCoordinateDisplay();
-      updateThumbs();
-    }
-
-    function updateThumbs() {
-      thumbsEl.innerHTML = "";
-
-      panoramas.forEach(function(item, index) {
-        const thumb = document.createElement("div");
-        thumb.className = "pano-thumb";
-
-        if (index === currentIndex) {
-          thumb.classList.add("active");
-        }
-
-        const img = document.createElement("img");
-        img.src = item.thumb;
-        img.alt = item.title;
-
-        const caption = document.createElement("div");
-        caption.className = "pano-thumb-caption";
-        caption.textContent = item.title;
-
-        thumb.appendChild(img);
-        thumb.appendChild(caption);
-
-        thumb.addEventListener("click", function() {
-          currentIndex = index;
-          loadPanorama();
-        });
-
-        thumbsEl.appendChild(thumb);
-      });
-    }
-
-    function previousPanorama() {
-      currentIndex--;
-
-      if (currentIndex < 0) {
-        currentIndex = panoramas.length - 1;
-      }
-
+    thumb.addEventListener("click", function() {
+      currentIndex = index;
       loadPanorama();
-    }
+    });
 
-    function nextPanorama() {
-      currentIndex++;
+    thumbsEl.appendChild(thumb);
+  });
+}
 
-      if (currentIndex >= panoramas.length) {
-        currentIndex = 0;
-      }
+function previousPanorama() {
+  currentIndex--;
+  if (currentIndex < 0) currentIndex = panoramas.length - 1;
+  loadPanorama();
+}
 
-      loadPanorama();
-    }
+function nextPanorama() {
+  currentIndex++;
+  if (currentIndex >= panoramas.length) currentIndex = 0;
+  loadPanorama();
+}
 
-    document.getElementById("pano-prev").addEventListener("click", previousPanorama);
-    document.getElementById("pano-next").addEventListener("click", nextPanorama);
-    copyCenterCoordinateButton.addEventListener("click", copyCenterHotspotCode);
+document.getElementById("pano-prev").addEventListener("click", previousPanorama);
+document.getElementById("pano-next").addEventListener("click", nextPanorama);
+copyCenterCoordinateButton.addEventListener("click", copyCenterHotspotCode);
 
-    loadPanorama();
-  </script>
+loadPanorama();
+</script>
 
 </body>
 </html>
