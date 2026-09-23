@@ -1,266 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Délı̨nę GeoHub</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+html,body{margin:0;font-family:Arial,sans-serif;background:#000}
+.hero{position:relative;min-height:1100px;overflow:hidden;color:#fff;text-align:center}
+video{position:absolute;width:100%;height:100%;object-fit:cover;left:0;top:0}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.42)}
+.content{position:relative;max-width:1000px;margin:auto;padding:100px 35px}
+.welcome{font-size:24px;font-weight:bold}
+.name{font-size:52px;font-weight:bold;margin:8px 0 40px}
+h1{font-size:40px;margin-bottom:55px}
+.text{font-size:19px;line-height:1.65}
+.slogan{font-size:36px;font-weight:bold;margin-top:65px}
+@media(max-width:768px){
+.hero{min-height:1180px}
+.content{padding:70px 24px}
+.name{font-size:40px}
+h1{font-size:31px}
+.text{font-size:16px}
+.slogan{font-size:29px}
 }
-
-/* Main video section */
-.geohub-video-section {
-    position: relative;
-    width: 100%;
-    min-height: 1050px;
-    overflow: hidden;
-
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-
-    color: white;
-}
-
-/* Background video */
-.geohub-video-section video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    width: 100%;
-    height: 100%;
-
-    min-width: 100%;
-    min-height: 100%;
-
-    transform: translate(-50%, -50%);
-
-    object-fit: cover;
-
-    z-index: 0;
-}
-
-/* Dark overlay for readability */
-.video-overlay {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            rgba(0,0,0,0.38),
-            rgba(0,0,0,0.50)
-        );
-
-    z-index: 1;
-}
-
-/* All page content */
-.geohub-content {
-    position: relative;
-    z-index: 2;
-
-    width: 100%;
-    max-width: 1100px;
-
-    margin: 0 auto;
-    padding-left: 40px;
-    padding-right: 40px;
-
-    box-sizing: border-box;
-
-    text-align: center;
-}
-
-/* Equivalent to your Hub spacer */
-.spacer {
-    height: 100px;
-}
-
-/* WELCOME TO */
-.welcome {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-/* DÉLĮNĘ GEOHUB */
-.geohub-name {
-    font-size: 38px;
-    font-weight: 700;
-    margin-bottom: 35px;
-}
-
-/* DISCOVER DÉLĮNĘ */
-.main-heading {
-    font-size: 38px;
-    line-height: 1.2;
-    font-weight: 700;
-
-    margin: 0 0 55px 0;
-}
-
-/* Main explanatory text */
-.description {
-    max-width: 940px;
-    margin: 0 auto;
-
-    font-size: 19px;
-    line-height: 1.65;
-
-    font-weight: 500;
-
-    text-shadow:
-        0 1px 3px rgba(0,0,0,0.8);
-}
-
-/* Bottom slogan */
-.slogan {
-    margin-top: 65px;
-
-    font-size: 36px;
-    line-height: 1.25;
-
-    font-weight: 700;
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,0.8);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-    .geohub-video-section {
-        min-height: 1150px;
-    }
-
-    .geohub-content {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
-
-    .spacer {
-        height: 70px;
-    }
-
-    .welcome {
-        font-size: 17px;
-    }
-
-    .geohub-name {
-        font-size: 30px;
-    }
-
-    .main-heading {
-        font-size: 31px;
-        margin-bottom: 40px;
-    }
-
-    .description {
-        font-size: 16px;
-        line-height: 1.6;
-    }
-
-    .slogan {
-        font-size: 29px;
-        margin-top: 50px;
-    }
-}
-
 </style>
 </head>
 
 <body>
+<div class="hero">
 
-<section class="geohub-video-section">
+<video autoplay muted loop playsinline>
+<source src="Deline_GeoHub_Background_1min_TownFishCamp_WEB.mp4" type="video/mp4">
+</video>
 
-    <!-- VIDEO -->
-    <video autoplay muted loop playsinline preload="auto">
-        <source
-            src="Deline_GeoHub_Background_1min_TownFishCamp_WEB.mp4"
-            type="video/mp4">
-    </video>
+<div class="overlay"></div>
 
-    <!-- DARK TRANSPARENT LAYER -->
-    <div class="video-overlay"></div>
+<div class="content">
 
-    <!-- CONTENT -->
-    <div class="geohub-content">
+<div class="welcome">Welcome to</div>
+<div class="name">Délı̨nę GeoHub</div>
 
-        <!-- 100px TOP SPACER -->
-        <div class="spacer"></div>
+<h1>Discover Délı̨nę Through GIS</h1>
 
+<div class="text">
+This is a time of memory and discovery.<br>
+A time to see the land not only as it is, but as it has been known, used, protected, and lived with for generations.<br><br>
 
-        <!-- SECTION 1 -->
-        <div class="welcome">
-            Welcome to
-        </div>
+Explore Délı̨nę in an interactive GIS-driven way — from hunting areas and traditional land use to community districts and culturally significant landscapes.<br><br>
 
-        <div class="geohub-name">
-            Délı̨nę GeoHub
-        </div>
+From traditional knowledge to updated research.<br>
+From hunting and fishing to mineral resources, remediation, and environmental stewardship.<br><br>
 
-        <h1 class="main-heading">
-            Discover Délı̨nę Through GIS
-        </h1>
+Through mapping technology, we can preserve, organize, and share the knowledge that connects people to the land.<br><br>
 
+The Délı̨nę GeoHub brings together traditional knowledge, community perspectives, and geographic information to support education, stewardship, and future planning for Délı̨nę.
+</div>
 
-        <!-- SECTION 2 -->
-        <div class="description">
+<div class="slogan">
+Our future. Our land. Our Délı̨nę.
+</div>
 
-            This is a time of memory and discovery.<br>
-
-            A time to see the land not only as it is, but as it has been
-            known, used, protected, and lived with for generations.
-
-            <br><br>
-
-            Explore Délı̨nę in an interactive GIS-driven way — from hunting
-            areas and traditional land use to community districts and
-            culturally significant landscapes.
-
-            <br><br>
-
-            From traditional knowledge to updated research.<br>
-
-            From hunting and fishing to mineral resources, remediation,
-            and environmental stewardship.
-
-            <br><br>
-
-            Through mapping technology, we can preserve, organize, and share
-            the knowledge that connects people to the land.
-
-            <br><br>
-
-            The Délı̨nę GeoHub brings together traditional knowledge,
-            community perspectives, and geographic information to support
-            education, stewardship, and future planning for Délı̨nę.
-
-        </div>
-
-
-        <!-- SECTION 3 -->
-        <div class="slogan">
-            Our future. Our land. Our Délı̨nę.
-        </div>
-
-
-        <!-- 100px BOTTOM SPACER -->
-        <div class="spacer"></div>
-
-    </div>
-
-</section>
-
+</div>
+</div>
 </body>
 </html>
