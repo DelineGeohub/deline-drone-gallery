@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Délı̨nę GeoHub Menu</title>
+<!-- Upload this HTML and these original images to the same folder:
+     maps.png, apps.png, interactive-maps.png, stories.png, feedback.png.
+     Filenames are case-sensitive. Images retain their original proportions. -->
+
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: transparent;
+  }
+
+  .dgg-menu {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px;
+  }
+
+  .dgg-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 0;
+    background: #073e38;
+    color: #fff8e9;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .dgg-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .dgg-description {
+    flex: 1;
+    margin: 0;
+    padding: 16px 18px 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .dgg-card[href]:hover .dgg-description {
+    text-decoration: underline;
+  }
+
+  .dgg-card:focus-visible {
+    outline: 3px solid #d4a45c;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 991px) {
+    .dgg-menu {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 575px) {
+    .dgg-menu {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+</style>
+</head>
+
+<body>
+<nav class="dgg-menu" aria-label="Explore Délı̨nę GeoHub">
+
+  <!-- MAPS: Put your future page URL inside href="". -->
+  <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
+    <img src="./maps.png"
+         alt="Maps">
+    <p class="dgg-description">
+      View and download printable PDF maps.
+    </p>
+  </a>
+
+  <!-- APPS: Includes your forms and surveys. Add the page URL below. -->
+  <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
+    <img src="./apps.png"
+         alt="Apps">
+    <p class="dgg-description">
+      Use online tools, forms, and surveys.
+    </p>
+  </a>
+
+  <!-- INTERACTIVE MAPS: Put your future page URL inside href="". -->
+  <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
+    <img src="./interactive-maps.png"
+         alt="Interactive Maps">
+    <p class="dgg-description">
+      Pan, zoom, and explore map layers.
+    </p>
+  </a>
+
+  <!-- STORIES: Put your future page URL inside href="". -->
+  <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
+    <img src="./stories.png"
+         alt="Stories">
+    <p class="dgg-description">
+      Explore Délı̨nę’s land, knowledge, and community stories.
+    </p>
+  </a>
+
+  <!-- FEEDBACK: Put your future page or survey URL inside href="". -->
+  <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
+    <img src="./feedback.png"
+         alt="Feedback">
+    <p class="dgg-description">
+      Share comments and suggestions about GeoHub.
+    </p>
+  </a>
+
+</nav>
+
+<script>
+  // Keep cards inactive until their destination URLs are added.
+  document.querySelectorAll(".dgg-card").forEach(function (card) {
+    if (!card.getAttribute("href").trim()) {
+      card.removeAttribute("href");
+      card.setAttribute("aria-disabled", "true");
+    }
+  });
+</script>
+</body>
+</html>
+
