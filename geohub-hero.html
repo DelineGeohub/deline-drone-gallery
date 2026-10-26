@@ -1,77 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Délı̨nę GeoHub Welcome</title>
+
 <style>
-html,body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#000;
+html,
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
 }
 
-.hero{
-  position:relative;
-  height:700px;
-  overflow:hidden;
-  color:#fff;
-  text-align:center;
+.hero {
+  position: relative;
+  height: 700px;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
 }
 
-video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  left:0;
-  top:0;
+video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
 }
 
-.overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.42);
-  pointer-events:none;
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  pointer-events: none;
 }
 
-.content{
-  position:relative;
-  box-sizing:border-box;
-  max-width:1000px;
-  height:100%;
-  margin:auto;
-  padding:30px 35px;
-  overflow-y:auto;
+.content {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 1000px;
+  height: 100%;
+  margin: auto;
+  padding: 30px 35px;
+  overflow-y: auto;
 }
 
-.welcome{
-  font-size:20px;
-  font-weight:bold;
+.welcome {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.name{
-  font-size:40px;
-  font-weight:bold;
-  margin:6px 0 20px;
+.name {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 6px 0 20px;
 }
 
-h1{
-  font-size:30px;
-  margin:0 0 24px;
+h1 {
+  font-size: 30px;
+  margin: 0 0 24px;
 }
 
-.text{
-  font-size:17px;
-  line-height:1.5;
+.text {
+  font-size: 17px;
+  line-height: 1.5;
 }
 
-.slogan{
-  font-size:28px;
-  font-weight:bold;
-  margin-top:28px;
+.slogan {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 28px;
 }
 
-@media(max-width:768px){
-  .content{padding:25px 20px}
-  .welcome{font-size:18px}
-  .name{font-size:34px;margin-bottom:18px}
-  h1{font-size:26px;margin-bottom:20px}
-  .text{font-size:16px}
-  .slogan{font-size:24px;margin-top:24px}
+@media (max-width: 768px) {
+  .content {
+    padding: 25px 20px;
+  }
+
+  .welcome {
+    font-size: 18px;
+  }
+
+  .name {
+    font-size: 34px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+
+  .slogan {
+    font-size: 24px;
+    margin-top: 24px;
+  }
 }
 </style>
+</head>
+
+<body>
+<div class="hero">
+
+  <video autoplay muted loop playsinline aria-hidden="true">
+    <source
+      src="Deline_GeoHub_Background_1min_TownFishCamp_WEB.mp4"
+      type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div
+    class="content"
+    tabindex="0"
+    role="region"
+    aria-label="Welcome to Délı̨nę GeoHub">
+
+    <div class="welcome">Welcome to</div>
+    <div class="name">Délı̨nę GeoHub</div>
+
+    <h1>Discover Délı̨nę Through GIS</h1>
+
+    <div class="text">
+      This is a time of memory and discovery.<br>
+      A time to see the land not only as it is, but as it has
+      been known, used, protected, and lived with for generations.<br><br>
+
+      Explore Délı̨nę in an interactive GIS-driven way — from
+      hunting areas and traditional land use to community
+      districts and culturally significant landscapes.<br><br>
+
+      From traditional knowledge to updated research.<br>
+      From hunting and fishing to mineral resources, remediation,
+      and environmental stewardship.<br><br>
+
+      Through mapping technology, we can preserve, organize, and
+      share the knowledge that connects people to the land.<br><br>
+
+      The Délı̨nę GeoHub brings together traditional knowledge,
+      community perspectives, and geographic information to
+      support education, stewardship, and future planning
+      for Délı̨nę.
+    </div>
+
+    <div class="slogan">
+      Our future. Our land. Our Délı̨nę.
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
