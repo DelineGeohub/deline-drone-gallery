@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="480" viewBox="0 0 600 480" role="img" aria-labelledby="drone-title drone-desc">
+  <title id="drone-title">Drone Gallery</title>
+  <desc id="drone-desc">A four-rotor camera drone with a lake and shoreline reflected in its lens.</desc>
+  <g id="drone-gallery-card">
+    <rect width="600" height="480" fill="#053F39"/>
+    <g id="quadcopter" transform="translate(0 -2) scale(1 1.10)">
+  <defs>
+    <g id="drone-propeller">
+      <path fill="#FFF8E9" d="M-6 1C-28 0-60-4-71-11Q-74-15-67-16C-42-16-20-10-3-4ZM6-1C28 0 60 4 71 11Q74 15 67 16C42 16 20 10 3 4Z"/>
+      <ellipse rx="8.5" ry="6" fill="#D3A35F"/>
+    </g>
+    <clipPath id="drone-lens-view"><circle cx="300" cy="257" r="30"/></clipPath>
+  </defs>
+  <!-- Back motors and arms sit higher and farther apart than the body. -->
+  <g fill="#78B9D4">
+    <path d="M271 172L183 110L178 98L188 89L281 149Z"/>
+    <path d="M329 172L417 110L422 98L412 89L319 149Z"/>
+  </g>
+  <g fill="#0078B8">
+    <path d="M177 80H197V105Q188 113 177 105Z"/>
+    <path d="M403 80H423V105Q413 113 403 105Z"/>
+  </g>
+  <g fill="#FFF8E9">
+    <rect x="181" y="72" width="12" height="12" rx="3"/>
+    <rect x="407" y="72" width="12" height="12" rx="3"/>
+  </g>
+  <use href="#drone-propeller" transform="translate(187 73) rotate(-18) scale(.78)"/>
+  <use href="#drone-propeller" transform="translate(413 73) scale(-.78 .78) rotate(-18)"/>
+  <!-- Open landing struts frame the suspended camera. -->
+  <g fill="none" stroke="#78B9D4" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M247 192L224 215L201 302H180"/>
+    <path d="M353 192L376 215L399 302H420"/>
+  </g>
+  <g fill="#FFF8E9">
+    <path d="M244 160L111 139L100 153L230 190L261 184Z"/>
+    <path d="M356 160L489 139L500 153L370 190L339 184Z"/>
+  </g>
+  <g fill="#0078B8">
+    <path d="M107 154L227 180L247 177L240 188L228 193L104 161Z"/>
+    <path d="M493 154L373 180L353 177L360 188L372 193L496 161Z"/>
+  </g>
+  <g fill="#FFF8E9">
+    <path d="M92 131Q92 126 99 126H109Q117 126 117 134V156Q111 166 99 161Q92 158 92 151Z"/>
+    <path d="M508 131Q508 126 501 126H491Q483 126 483 134V156Q489 166 501 161Q508 158 508 151Z"/>
+  </g>
+  <path fill="#ED174B" d="M92 145L117 150V156L92 151Z"/>
+  <path fill="#009980" d="M508 145L483 150V156L508 151Z"/>
+  <use href="#drone-propeller" transform="translate(105 126) rotate(-13)"/>
+  <use href="#drone-propeller" transform="translate(495 126) scale(-1 1) rotate(-13)"/>
+  <!-- Cream airframe with blue fold lines, front sensors and a status light. -->
+  <path fill="#FFF8E9" d="M225 164L253 137Q262 127 279 126H321Q338 127 347 137L375 164L361 190Q352 202 334 206H266Q248 202 239 190Z"/>
+  <path fill="#78B9D4" d="M239 166L259 147Q267 140 279 140H321Q333 140 341 147L361 166L337 162H263Z"/>
+  <path fill="#0078B8" d="M250 178L270 183H330L350 178L339 195H261Z"/>
+  <path fill="#053F39" d="M244 167L269 171L265 178L249 175ZM356 167L331 171L335 178L351 175Z"/>
+  <rect x="290" y="151" width="20" height="5" rx="2.5" fill="#D3A35F"/>
+  <!-- Gimbal and camera. A small lake view is reflected in the lens. -->
+  <rect x="287" y="204" width="26" height="19" rx="5" fill="#78B9D4"/>
+  <path d="M249 212V245Q249 256 259 256M351 212V245Q351 256 341 256" fill="none" stroke="#D3A35F" stroke-width="8" stroke-linecap="round"/>
+  <rect x="252" y="220" width="96" height="75" rx="15" fill="#FFF8E9"/>
+  <circle cx="300" cy="257" r="39" fill="#053F39"/>
+  <circle cx="300" cy="257" r="34" fill="#D3A35F"/>
+  <g clip-path="url(#drone-lens-view)">
+    <circle cx="300" cy="257" r="30" fill="#FFF8E9"/>
+    <circle cx="310" cy="244" r="7" fill="#D3A35F"/>
+    <path fill="#78B9D4" d="M266 255L282 243L297 254L306 249L320 255L336 247V288H266Z"/>
+    <path fill="#0078B8" d="M266 257C279 256 285 259 302 257S326 255 336 257V291H266Z"/>
+    <path fill="#053F39" d="M266 255Q282 254 289 259Q296 261 284 263Q279 265 290 267Q306 270 292 274Q280 278 279 289H266Z"/>
+    <path fill="#78B9D4" d="M304 266Q314 262 323 265Q314 265 307 268Z"/>
+  </g>
+  <path d="M280 304Q300 309 320 304" fill="none" stroke="#78B9D4" stroke-width="4" stroke-linecap="round"/>
+</g>
+    <g id="drone-shoreline">
+      <path d="M0 406 C52 403 70 428 112 441 C152 454 188 455 242 473 C178 464 147 468 101 454 C53 439 42 420 0 420 Z" fill="#0078B8"/>
+      <path d="M0 439 C41 429 70 441 105 456 C136 469 166 475 199 470 C169 482 135 480 101 468 C65 454 40 440 0 450 Z" fill="#009980"/>
+      <path d="M21 442 C64 431 91 447 119 460 C141 471 160 474 182 472 C153 484 131 479 105 466 C77 452 56 443 21 442 Z" fill="#ED174B"/>
+      <path d="M410 462 C450 438 472 438 507 447 C540 455 564 445 600 445 L600 455 C565 452 544 464 505 456 C471 448 449 448 410 462 Z" fill="#0078B8"/>
+      <path d="M402 456 C440 450 456 423 496 417 C528 410 563 420 600 417 L600 425 C561 431 536 420 500 425 C461 431 441 452 402 456 Z" fill="#78B9D4"/>
+      <g transform="translate(521 439) scale(0.25)">
+        <path d="M0 -100 L-10 -77 L-5 -78 L-17 -57 L-10 -60 L-25 -35 L-15 -39 L-32 -12 L-6 -12 L-6 0 L6 0 L6 -12 L32 -12 L15 -39 L25 -35 L10 -60 L17 -57 L5 -78 L10 -77 Z" fill="#78B9D4"/>
+      </g>
+      <g transform="translate(550 442) scale(0.19)">
+        <path d="M0 -100 L-10 -77 L-5 -78 L-17 -57 L-10 -60 L-25 -35 L-15 -39 L-32 -12 L-6 -12 L-6 0 L6 0 L6 -12 L32 -12 L15 -39 L25 -35 L10 -60 L17 -57 L5 -78 L10 -77 Z" fill="#78B9D4"/>
+      </g>
+      <g transform="translate(497 441) scale(0.17)">
+        <path d="M0 -100 L-10 -77 L-5 -78 L-17 -57 L-10 -60 L-25 -35 L-15 -39 L-32 -12 L-6 -12 L-6 0 L6 0 L6 -12 L32 -12 L15 -39 L25 -35 L10 -60 L17 -57 L5 -78 L10 -77 Z" fill="#78B9D4"/>
+      </g>
+    </g>
+    <g fill="#FFF8E9" id="drone-lettering" transform="translate(103.3403 413) scale(0.02050781 -0.02050781)">
+      <path d="M573 1202V291H711Q947 291 1071.5 408.0Q1196 525 1196 748Q1196 970 1072.0 1086.0Q948 1202 711 1202ZM188 1493H594Q934 1493 1100.5 1444.5Q1267 1396 1386 1280Q1491 1179 1542.0 1047.0Q1593 915 1593 748Q1593 579 1542.0 446.5Q1491 314 1386 213Q1266 97 1098.0 48.5Q930 0 594 0H188Z" transform="translate(0 0)"/>
+      <path d="M735 831Q856 831 908.5 876.0Q961 921 961 1024Q961 1126 908.5 1170.0Q856 1214 735 1214H573V831ZM573 565V0H188V1493H776Q1071 1493 1208.5 1394.0Q1346 1295 1346 1081Q1346 933 1274.5 838.0Q1203 743 1059 698Q1138 680 1200.5 616.5Q1263 553 1327 424L1536 0H1126L944 371Q889 483 832.5 524.0Q776 565 682 565Z" transform="translate(1700 0)"/>
+      <path d="M870 1241Q694 1241 597.0 1111.0Q500 981 500 745Q500 510 597.0 380.0Q694 250 870 250Q1047 250 1144.0 380.0Q1241 510 1241 745Q1241 981 1144.0 1111.0Q1047 1241 870 1241ZM870 1520Q1230 1520 1434.0 1314.0Q1638 1108 1638 745Q1638 383 1434.0 177.0Q1230 -29 870 -29Q511 -29 306.5 177.0Q102 383 102 745Q102 1108 306.5 1314.0Q511 1520 870 1520Z" transform="translate(3277 0)"/>
+      <path d="M188 1493H618L1161 469V1493H1526V0H1096L553 1024V0H188Z" transform="translate(5018 0)"/>
+      <path d="M188 1493H1227V1202H573V924H1188V633H573V291H1249V0H188Z" transform="translate(6732 0)"/>
+      <path d="M1530 111Q1386 41 1231.0 6.0Q1076 -29 911 -29Q538 -29 320.0 179.5Q102 388 102 745Q102 1106 324.0 1313.0Q546 1520 932 1520Q1081 1520 1217.5 1492.0Q1354 1464 1475 1409V1100Q1350 1171 1226.5 1206.0Q1103 1241 979 1241Q749 1241 624.5 1112.5Q500 984 500 745Q500 508 620.0 379.0Q740 250 961 250Q1021 250 1072.5 257.5Q1124 265 1165 281V571H930V829H1530Z" transform="translate(8844 0)"/>
+      <path d="M1094 272H492L397 0H10L563 1493H1022L1575 0H1188ZM588 549H997L793 1143Z" transform="translate(10525 0)"/>
+      <path d="M188 1493H573V291H1249V0H188Z" transform="translate(12110 0)"/>
+      <path d="M188 1493H573V291H1249V0H188Z" transform="translate(13415 0)"/>
+      <path d="M188 1493H1227V1202H573V924H1188V633H573V291H1249V0H188Z" transform="translate(14720 0)"/>
+      <path d="M735 831Q856 831 908.5 876.0Q961 921 961 1024Q961 1126 908.5 1170.0Q856 1214 735 1214H573V831ZM573 565V0H188V1493H776Q1071 1493 1208.5 1394.0Q1346 1295 1346 1081Q1346 933 1274.5 838.0Q1203 743 1059 698Q1138 680 1200.5 616.5Q1263 553 1327 424L1536 0H1126L944 371Q889 483 832.5 524.0Q776 565 682 565Z" transform="translate(16119 0)"/>
+      <path d="M-20 1493H401L741 961L1081 1493H1503L934 629V0H549V629Z" transform="translate(17696 0)"/>
+    </g>
+  </g>
+</svg>
