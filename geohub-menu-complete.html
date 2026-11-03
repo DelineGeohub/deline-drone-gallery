@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Délı̨nę GeoHub Menu</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -54,29 +57,9 @@
       line-height: 1.45;
     }
 
-    .dgg-gallery-link {
-      display: block;
-      color: inherit;
-      text-decoration: none;
+    .dgg-card:hover .dgg-description {
+      text-decoration: underline;
     }
-
-    .dgg-media-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 4px 14px;
-      margin: 3px 0 0;
-      font-size: 14px;
-    }
-
-    .dgg-media-links a {
-      padding: 5px 0;
-      color: #005d78;
-      text-underline-offset: 3px;
-    }
-
-    .dgg-card[href]:hover .dgg-description,
-    .dgg-gallery-link:hover .dgg-description { text-decoration: underline; }
 
     .dgg-menu a:focus-visible {
       outline: 3px solid #005d78;
@@ -84,58 +67,80 @@
     }
 
     @media (max-width: 991px) {
-      .dgg-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .dgg-menu {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 575px) {
-      .dgg-menu { grid-template-columns: 1fr; }
+      .dgg-menu {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <main class="dgg-section">
     <h2 id="menu-heading">Explore the GeoHub</h2>
+
     <nav class="dgg-menu" aria-labelledby="menu-heading">
-      <!-- Enter each page URL in its empty href when ready. -->
-      <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
-        <img src="https://delinegeohub.github.io/deline-drone-gallery/maps.png" alt="Maps" width="600" height="480">
+
+      <!-- Maps -->
+      <a class="dgg-card"
+         href="https://wlugeography.hub.arcgis.com/pages/maps~19845b76a4b34458a2d1a0c571d75b45"
+         target="_blank" rel="noopener noreferrer">
+        <img src="https://delinegeohub.github.io/deline-drone-gallery/maps.png"
+             alt="Maps" width="600" height="480">
         <p class="dgg-description">View and download printable PDF maps.</p>
       </a>
 
-      <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
-        <img src="https://delinegeohub.github.io/deline-drone-gallery/apps.png" alt="Apps" width="600" height="480">
+      <!-- Apps -->
+      <a class="dgg-card"
+         href="https://wlugeography.hub.arcgis.com/pages/apps~cf913c1bdf4f4260ab432a8b66bf59fc"
+         target="_blank" rel="noopener noreferrer">
+        <img src="https://delinegeohub.github.io/deline-drone-gallery/apps.png"
+             alt="Apps" width="600" height="480">
         <p class="dgg-description">Use online tools, forms, and surveys.</p>
       </a>
 
-      <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
-        <img src="https://delinegeohub.github.io/deline-drone-gallery/interactive-maps.png" alt="Interactive Maps" width="600" height="480">
+      <!-- Interactive Maps -->
+      <a class="dgg-card"
+         href="https://wlugeography.hub.arcgis.com/pages/web-maps~5a3c17afea2e4b54955ecd282c7bb8d5"
+         target="_blank" rel="noopener noreferrer">
+        <img src="https://delinegeohub.github.io/deline-drone-gallery/interactive-maps.png"
+             alt="Interactive Maps" width="600" height="480">
         <p class="dgg-description">Pan, zoom, and explore map layers.</p>
       </a>
 
-      <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
-        <img src="https://delinegeohub.github.io/deline-drone-gallery/stories.png" alt="Stories" width="600" height="480">
+      <!-- Stories -->
+      <a class="dgg-card"
+         href="https://wlugeography.hub.arcgis.com/pages/stories~7fe74fd58efc4edf8595df4fc069f278"
+         target="_blank" rel="noopener noreferrer">
+        <img src="https://delinegeohub.github.io/deline-drone-gallery/stories.png"
+             alt="Stories" width="600" height="480">
         <p class="dgg-description">Explore Délı̨nę’s land, knowledge, and community stories.</p>
       </a>
-      <a class="dgg-gallery-link" href="https://delinegeohub.github.io/deline-drone-gallery/index.html" target="_blank" rel="noopener noreferrer">
-          <img src="https://delinegeohub.github.io/deline-drone-gallery/drone-gallery.svg" alt="Drone Gallery" width="600" height="480">
-          <p class="dgg-description">Explore Délı̨nę from above through drone photos, 360° panoramas, and video.</p>
+
+      <!-- Drone Gallery -->
+      <a class="dgg-card"
+         href="https://wlugeography.hub.arcgis.com/pages/drone-clips~cc64f5a2deaa40149abafe64ae247788"
+         target="_blank" rel="noopener noreferrer">
+        <img src="https://delinegeohub.github.io/deline-drone-gallery/drone-gallery.svg"
+             alt="Drone Gallery" width="600" height="480">
+        <p class="dgg-description">Explore Délı̨nę from above through drone photos, 360° panoramas, and video.</p>
       </a>
-      <div class="dgg-card">
-        <a class="dgg-card" href="" target="_blank" rel="noopener noreferrer">
-        <img src="https://delinegeohub.github.io/deline-drone-gallery/feedback.png" alt="Feedback" width="600" height="480">
+
+      <!-- Feedback -->
+      <a class="dgg-card"
+         href="https://survey123.arcgis.com/share/c5ef4e9cb709436388b6f2192514dff5"
+         target="_blank" rel="noopener noreferrer">
+        <img src="https://delinegeohub.github.io/deline-drone-gallery/feedback.png"
+             alt="Feedback" width="600" height="480">
         <p class="dgg-description">Share comments and suggestions about GeoHub.</p>
       </a>
-      </div>
+
     </nav>
   </main>
-
-  <script>
-    // Keep cards inactive until their destination URLs are added above.
-    document.querySelectorAll('.dgg-card[href=""]').forEach(function (card) {
-      card.removeAttribute('href');
-      card.setAttribute('aria-disabled', 'true');
-    });
-  </script>
 </body>
 </html>
-
